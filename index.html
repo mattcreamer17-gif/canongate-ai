@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Canongate AI. A read on where AI fits in the stack.</title>
+<meta name="description" content="You went through AXA XL's Startup Showcase, you're shipping peril-specific feeds for SRCC and war coverage out of Edinburgh, and our CTO trained at Edinburgh too. A peer conversation on context architecture, not a vendor pitch.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="masthead" role="banner">
+  <div class="wrap">
+    <a class="brand" href="https://canongate.ai/" target="_blank" rel="noopener" aria-label="Canongate AI">
+      <img src="logo.svg" alt="Canongate AI" width="260" height="40">
+    </a>
+    <div class="dateline">
+      <span class="kicker">Working paper</span>
+      <span class="mono">No. 049 / eMerge Americas 2026 / Booth SS9</span>
+    </div>
+  </div>
+</header>
+
+<main class="paper">
+
+  <article class="document wrap">
+
+    <section class="titleblock" aria-labelledby="doctitle">
+      <div class="tags">
+        <span class="tag">Political Risk Intelligence</span>
+        <span class="tag">Context Architecture</span>
+        <span class="tag">Peer Read</span>
+      </div>
+      <h1 id="doctitle">A read on where AI fits in Canongate AI's stack, and where it doesn't.</h1>
+      <p class="standfirst">
+        Prepared for Tim Hurst and Simon Catley, co-founders, Canongate AI Ltd (Roslin, Midlothian). A one-sitting note from a peer team, not a vendor deck. Read it before the call if it is worth a call.
+      </p>
+      <dl class="meta">
+        <div><dt>Subject</dt><dd>Orchestration, context bleed, eval load</dd></div>
+        <div><dt>Stage</dt><dd>Post-AXA XL Showcase, pre-first pilot lock-in</dd></div>
+        <div><dt>Audience</dt><dd>Canongate AI only, one copy printed</dd></div>
+        <div><dt>Footing</dt><dd>CTO to CTO</dd></div>
+      </dl>
+    </section>
+
+    <hr class="rule">
+
+    <section class="section" aria-labelledby="s1">
+      <p class="sectionlabel mono">§ 1. What we already see</p>
+      <h2 id="s1" class="h2">You are building structured intelligence for underwriters out of Edinburgh.</h2>
+      <p>
+        Peril-specific, real-time, already in front of specialty insurers. We noticed the AXA XL Startup Showcase, the Swift Centre for Applied Forecasting partnership, and the published notes on Pakistan, Israel, South Africa, and Venezuela. The Miami booth is a Latin America pipeline play. None of that is accidental.
+      </p>
+      <p>
+        We are not pitching you a strategy engagement. At your stage, the two founders running product and commercials already know the strategy. What you do not have is twenty extra hours a week from someone who has spent the last year on the context-architecture problem specifically.
+      </p>
+    </section>
+
+    <section class="section" aria-labelledby="s2">
+      <p class="sectionlabel mono">§ 2. How we would think about your stack</p>
+      <h2 id="s2" class="h2">Three layers. One discipline: know which layer each problem belongs on.</h2>
+
+      <div class="layers" role="list">
+        <div class="layer" role="listitem">
+          <div class="layernum mono">60<span>%</span></div>
+          <div class="layerbody">
+            <h3>Ordinary code and database work</h3>
+            <p>Ingestion, de-duplication, jurisdiction tagging, versioning, audit logs, review queues. Postgres, jobs, schemas. The boring half that decides whether the pretty half can be trusted.</p>
+          </div>
+        </div>
+        <div class="layer" role="listitem">
+          <div class="layernum mono">30<span>%</span></div>
+          <div class="layerbody">
+            <h3>Rule-based logic</h3>
+            <p>Peril taxonomy, scoring thresholds, methodology rules an underwriter can read, sign, and defend. Deterministic where determinism is a feature, not a bug.</p>
+          </div>
+        </div>
+        <div class="layer" role="listitem">
+          <div class="layernum mono">10<span>%</span></div>
+          <div class="layerbody">
+            <h3>Genuine LLM work</h3>
+            <p>Synthesis, classification into perils, drafting the reasoning trail a human can sign off. Narrow, evaluated, auditable. Not where the product lives. Where the product gets its voice.</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="aside">
+        Teams who blur those layers waste model spend putting language models where Postgres would be faster, cheaper, and auditable. Teams who get the split right ship faster and survive the first eval disagreement with a tier-one carrier.
+      </p>
+    </section>
+
+    <section class="section" aria-labelledby="s3">
+      <p class="sectionlabel mono">§ 3. The hypothesis we would test on a call</p>
+      <h2 id="s3" class="h2">Three statements. Thirty seconds of your time each.</h2>
+      <ol class="hyp">
+        <li>
+          <span class="hypnum mono">H1</span>
+          <div>
+            <h4>Evaluation and audit-trail burden</h4>
+            <p>Right now, when an underwriter disputes a score moving two points in a week, the audit trail lives in Tim's head and a notebook. That does not clear the next two pilots.</p>
+          </div>
+        </li>
+        <li>
+          <span class="hypnum mono">H2</span>
+          <div>
+            <h4>Context bleed across perils and jurisdictions</h4>
+            <p>A Venezuela oil-nationalisation signal should not creep into Brazil SRCC scoring. The natural failure mode of a growing corpus is exactly that. The fix is structural, not prompt-level.</p>
+          </div>
+        </li>
+        <li>
+          <span class="hypnum mono">H3</span>
+          <div>
+            <h4>US GTM stretch</h4>
+            <p>An Edinburgh team of 2 to 10 running a Miami booth means every hour at the booth is an hour not on the pipeline. Who services the US leads you generate this week, and on what timeline, before they stale.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section" aria-labelledby="s4">
+      <p class="sectionlabel mono">§ 4. Proof that matches your shape</p>
+      <h2 id="s4" class="h2">Feeld, with Andrew Santus, CTO.</h2>
+      <p>
+        A scoped sprint. Workshop, advisory calls, an Organizational Context Architecture tuned to their stack, and a Strategic Operations Framework. Andrew did not buy a consulting retainer. He bought a peer who had done the reading and handed him an architecture he still uses.
+      </p>
+      <p>
+        That is the shape of conversation Tim can buy. Short, dense, CTO to CTO, leaves a working artifact behind.
+      </p>
+      <div class="ledger">
+        <dl>
+          <div><dt class="mono">Buyer</dt><dd>Technical co-founder, product company</dd></div>
+          <div><dt class="mono">Shape</dt><dd>Scoped advisory sprint</dd></div>
+          <div><dt class="mono">Artifact</dt><dd>Organizational Context Architecture + SOF</dd></div>
+          <div><dt class="mono">After</dt><dd>Methodology survived the engagement</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="s5">
+      <p class="sectionlabel mono">§ 5. The paper to read before the call</p>
+      <h2 id="s5" class="h2">Interpretable Context Methodology (ICM).</h2>
+      <p>
+        Submitted to ACM TiiS. Repo is MIT-licensed. The argument: agent context can be organised as a layered filesystem (L0 identity through L4 working artifacts), with measurable interpretability and reproducibility gains. It was written for your problem shape: bounded-but-large corpus, multiple jurisdictions and perils, agents that need to know what they know and where each claim came from.
+      </p>
+      <p class="links">
+        <a href="https://github.com/RinDig/Interpretable-Context-Methodology-ICM-" target="_blank" rel="noopener">github.com/RinDig/Interpretable-Context-Methodology-ICM-</a>
+      </p>
+      <p class="smallprint">
+        One related thread worth a glance, given your audience of specialty insurers and conservative governance readers: the Ethics Engine, a psychometric assessment tool for evaluating ideological and moral patterns in LLMs.
+        <a href="https://arxiv.org/abs/2510.11742" target="_blank" rel="noopener">arxiv.org/abs/2510.11742</a>
+        and
+        <a href="https://github.com/RinDig/AuditEngine" target="_blank" rel="noopener">github.com/RinDig/AuditEngine</a>.
+      </p>
+    </section>
+
+    <section class="section" aria-labelledby="s6">
+      <p class="sectionlabel mono">§ 6. Where we stop being useful</p>
+      <h2 id="s6" class="h2">Below the orchestration layer, we hand off.</h2>
+      <p>
+        If the pain is production ML engineering, data pipeline hardening, or security and infrastructure work that sits below the orchestration layer, Eduba partners with NLP Logix. NLP Logix has been in machine learning since 2011 and runs over 150 data scientists. We will make that introduction directly.
+      </p>
+    </section>
+
+    <section class="section credit" aria-labelledby="s7">
+      <p class="sectionlabel mono">§ 7. Who is writing to you</p>
+      <h2 id="s7" class="h2">Jake Van Clief. Edinburgh, Roslin, Miami, in that order.</h2>
+      <ul class="credlist">
+        <li>MSc Future Governance, University of Edinburgh.</li>
+        <li>Published in ACM TiiS (ICM) and arXiv (Ethics Engine, a psychometric assessment tool for evaluating ideological and moral patterns in LLMs).</li>
+        <li>Marine Corps veteran, 8 years, cryptographic systems, F-35 and F-18 avionics.</li>
+        <li>1,500+ people trained across enterprise engagements since May 2025, including at KPMG UK (Big Four) and a Correlation One programme running through Pacific Life and Colgate-Palmolive.</li>
+        <li>Jake also built an online community to 22,000 members in 5 weeks.</li>
+      </ul>
+    </section>
+
+    <hr class="rule">
+
+    <section class="cta" aria-labelledby="cta">
+      <p class="sectionlabel mono">§ 8. Next move</p>
+      <h2 id="cta" class="h2 cta-h2">Thirty minutes with Matt Creamer.</h2>
+      <p class="ctabody">
+        Matt is Eduba's CRO. He takes the first call, reads the room, and puts Tim on a peer call with Jake if the fit holds. Bring one layer of the pipeline you are not sure belongs where.
+      </p>
+      <p class="ctaaction">
+        <a class="button" href="https://calendly.com/thecro-eduba/30min" target="_blank" rel="noopener">
+          Book 30 minutes
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </p>
+      <p class="ctafallback mono">
+        calendly.com/thecro-eduba/30min
+      </p>
+    </section>
+
+  </article>
+
+</main>
+
+<footer class="footer" role="contentinfo">
+  <div class="wrap footwrap">
+    <p class="colophon">
+      Prepared by Eduba,
+      <a href="https://eduba.io" target="_blank" rel="noopener">eduba.io</a>.
+      A one-off working paper for Canongate AI Ltd, SC828832.
+    </p>
+    <p class="colophon mono">
+      Set in Fraunces and Inter. Printed to screen. No tracking, no tartan.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
